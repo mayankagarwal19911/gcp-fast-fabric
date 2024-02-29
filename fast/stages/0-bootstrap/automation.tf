@@ -137,7 +137,7 @@ module "automation-project" {
       "essentialcontacts.googleapis.com",
       "iam.googleapis.com",
       "iamcredentials.googleapis.com",
-      "orgpolicy.googleapis.com",
+      "orgpolicy.googleapis.com", // --  API not getting enabled
       "pubsub.googleapis.com",
       "servicenetworking.googleapis.com",
       "serviceusage.googleapis.com",
