@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-labels:
- team: team-0
-parent: folders/325387422971
-services:
-- compute.googleapis.com
-- storage.googleapis.com
+# the following permissions are a descoped version of tagAdm
+name: tagViewer
+includedPermissions:
+  - resourcemanager.tagHolds.list
+  - resourcemanager.tagKeys.get
+  - resourcemanager.tagKeys.getIamPolicy
+  - resourcemanager.tagKeys.list
+  - resourcemanager.tagValues.get
+  - resourcemanager.tagValues.getIamPolicy
+  - resourcemanager.tagValues.list
+  

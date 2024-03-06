@@ -1,0 +1,15 @@
+groups:
+  - name: org-admin
+    permissions:
+    - roles/resourcemanager.organizationAdmin
+
+  - name: org-secops-admin
+    permissions:
+    - roles/iam.securityReviewer 
+    - roles/logging.viewer 
+    - roles/monitoring.admin 
+    - roles/orgpolicy.policyAdmin 
+    - roles/advisorynotifications.admin 
+    - roles/cloudsecurityscanner.editor 
+    - roles/compute.orgFirewallPolicyAdmin 
+    - roles/compute.orgSecurityPolicyAdmin

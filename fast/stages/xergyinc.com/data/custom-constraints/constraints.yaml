@@ -1,0 +1,11 @@
+custom.gkeEnableAutoUpgrades:
+  action_type: ALLOW
+  condition: resource.management.autoUpgrade == true
+  description: All node pools must have node auto-upgrade enabled.
+  display_name: Enable node auto-upgrade
+  method_types:
+    - CREATE
+  name: custom.gkeEnableAutoUpgrades
+  parent: organizations/592550595621
+  resource_types:
+    - container.googleapis.com/NodePool

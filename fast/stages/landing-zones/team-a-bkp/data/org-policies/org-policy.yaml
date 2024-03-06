@@ -1,0 +1,33 @@
+# folders/203593119232/policies/iam.disableServiceAccountKeyCreation:
+#   rules:
+#   - enforce: false
+
+# # folders/203593119232/policies/iam.automaticIamGrantsForDefaultServiceAccounts:
+# #   rules:
+# #     - enforce: false
+
+# projects/btstrap02-dev-project-xx-0/policies/iam.automaticIamGrantsForDefaultServiceAccounts:
+#   rules:
+#     - enforce: false
+
+# projects/btstrap02-dev-project-xx-1/policies/iam.automaticIamGrantsForDefaultServiceAccounts:
+#   rules:
+#     - enforce: true
+
+iam.allowedPolicyMemberDomains:
+  name: organizations/592550595621/policies/iam.allowedPolicyMemberDomains
+  parent: organizations/592550595621
+  spec:
+  - inherit_from_parent: true
+    reset: null
+    rules:
+    - allow_all: null
+      condition: []
+      deny_all: null
+      enforce: null
+      values:
+      - allowed_values:
+        - C0xxxxxxx
+        - C0yyyyyyy
+        denied_values: null
+  timeouts: null

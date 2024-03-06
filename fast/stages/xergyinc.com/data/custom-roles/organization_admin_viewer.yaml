@@ -12,13 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# the following permissions are a descoped version of tagAdm
-name: tagViewer
+# this is used by the plan-only admin SA
+name: organizationAdminViewer
 includedPermissions:
-  - resourcemanager.tagHolds.list
-  - resourcemanager.tagKeys.get
-  - resourcemanager.tagKeys.getIamPolicy
-  - resourcemanager.tagKeys.list
-  - resourcemanager.tagValues.get
-  - resourcemanager.tagValues.getIamPolicy
-  - resourcemanager.tagValues.list
+  - essentialcontacts.contacts.get
+  - essentialcontacts.contacts.list
+  - orgpolicy.constraints.list
+  - orgpolicy.policies.list
+  - orgpolicy.policy.get
+  - resourcemanager.folders.get
+  - resourcemanager.folders.getIamPolicy
+  - resourcemanager.folders.list
+  - resourcemanager.organizations.get
+  - resourcemanager.organizations.getIamPolicy
+  - resourcemanager.projects.get
+  - resourcemanager.projects.getIamPolicy
+  - resourcemanager.projects.list
