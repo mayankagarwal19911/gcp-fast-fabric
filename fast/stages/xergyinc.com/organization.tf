@@ -203,14 +203,14 @@ module "organization" {
     ),
     org_policy_custom_constraints = var.factories_config.org_policy_custom_constraints
   }
-  # logging_sinks = {
-  #   for name, attrs in var.log_sinks : name => {
-  #     bq_partitioned_table = attrs.type == "bigquery"
-  #     destination          = local.log_sink_destinations[name].id
-  #     filter               = attrs.filter
-  #     type                 = attrs.type
-  #   }
-  # }
+  logging_sinks = {
+    for name, attrs in var.log_sinks : name => {
+      bq_partitioned_table = attrs.type == "bigquery"
+      destination          = local.log_sink_destinations[name].id
+      filter               = attrs.filter
+      type                 = attrs.type
+    }
+  }
   org_policies = var.bootstrap_user != null ? {} : {
     "iam.allowedPolicyMemberDomains" = {
       rules = [

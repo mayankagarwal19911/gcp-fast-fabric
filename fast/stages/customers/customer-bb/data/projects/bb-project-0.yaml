@@ -1,0 +1,14 @@
+labels:
+ team: team-bb-stable
+parent: folders/676856021563
+services:
+- container.googleapis.com
+- storage.googleapis.com
+- compute.googleapis.com
+- monitoring.googleapis.com
+- privateca.googleapis.com
+- cloudresourcemanager.googleapis.com
+- cloudkms.googleapis.com
+- servicenetworking.googleapis.com
+- secretmanager.googleapis.com
+- serviceusage.googleapis.com

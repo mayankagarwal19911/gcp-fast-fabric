@@ -95,11 +95,11 @@ locals {
       }
     }
     custom_roles = module.organization.custom_role_id
-    # logging = {
-    #   project_id        = module.log-export-project.project_id
-    #   project_number    = module.log-export-project.number
-    #   writer_identities = module.organization.sink_writer_identities
-    # }
+    logging = {
+      project_id        = local.audit_project_id
+      project_number    = local.audit_project_number
+      writer_identities = module.organization.sink_writer_identities
+    }
     org_policy_tags = {
       key_id = (
         module.organization.tag_keys[var.org_policies_config.tag_name].id
@@ -207,4 +207,12 @@ output "workload_identity_pool" {
     )
     providers = local.cicd_providers
   }
+}
+
+output "logging_details" {
+  value = {
+      project_id        = local.audit_project_id
+      project_number    = local.audit_project_number
+      writer_identities = module.organization.sink_writer_identities
+    }
 }

@@ -19,12 +19,7 @@ locals {
       }
     }
   }
-  workload_identity_providers = {
-    for k, v in var.workload_identity_providers : k => merge(
-      v,
-      lookup(local.workload_identity_providers_defs, v.issuer, {})
-    )
-  }
+
   workload_identity_providers_defs = {
     # https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect
     github = {
@@ -65,6 +60,13 @@ locals {
     }
   }
 
+  workload_identity_providers = {
+    for k, v in var.workload_identity_providers : k => merge(
+      v,
+      lookup(local.workload_identity_providers_defs, v.issuer, {})
+    )
+  }
+
   project_details = { for key, value in module.org_project : key => [{
     project_id     = module.org_project[key].project_id
     project_number = module.org_project[key].number
@@ -73,6 +75,19 @@ locals {
   # project_ids = [for key, value in module.org_project : value.project_id]
   automation_project_id     = lookup(local.project_details, "automation")[0].project_id
   automation_project_number = lookup(local.project_details, "automation")[0].project_number
+
+  # TO DELETE, only for testing purpose
+
+  workload_identity_providers_test = {
+    for k, v in var.workload_identity_providers : k => merge(
+      v,
+      lookup(local.workload_identity_providers_defs, v.issuer, {})
+    )
+  }
+}
+
+output "workload_identity_providers_test" {
+  value = local.workload_identity_providers_test
 }
 
 resource "google_iam_workforce_pool" "default" {
@@ -128,3 +143,26 @@ resource "google_iam_workload_identity_pool_provider" "default" {
     jwks_json = each.value.custom_settings.jwks_json
   }
 }
+
+# resource "google_service_account_iam_member" "org-automation-sa" {
+#   for_each           = local.cicd_repositories
+#   service_account_id = module.automation-tf-cicd-sa[each.key].email
+#   role               = "roles/iam.workloadIdentityUser"
+#   member             = local.cicd_providers[each.value.identity_provider].name
+# }
+
+# output "cicd_repositories_filter" {
+#   description = "CI/CD repository configurations."
+#   value = {
+#     for key, value in local.cicd_repositories : key => {
+      
+#       branch = value.branch
+#       identity_provider = local.cicd_providers
+
+#     }
+#       # branch          = key
+#       # name            = value
+#       # provider        = try(local.cicd_providers[v.identity_provider].name, null)
+#       # service_account = try(module.automation-tf-cicd-sa[k].email, null)
+#   }
+# }

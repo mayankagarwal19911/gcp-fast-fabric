@@ -2,8 +2,6 @@
 locals {
   cicd_resman_sa   = try(module.automation-tf-cicd-sa["resman"].iam_email, "")
   cicd_resman_r_sa = try(module.automation-tf-cicd-r-sa["resman"].iam_email, "")
-
-
 }
 # resource hierarchy stage's bucket and service account
 

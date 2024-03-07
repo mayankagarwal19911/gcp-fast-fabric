@@ -1,11 +1,6 @@
 # tfdoc:file:description Automation project and resources.
 
 locals {
-  _org_config_data_raw = merge([
-    for f in try(fileset(path.module, "/configurations/org-config.yaml"), []) :
-    yamldecode(file("${path.module}/${f}"))
-  ]...)
-
   yaml_tf_variables_mapping = {
     automation-tf-resman-r-sa = module.automation-tf-resman-r-sa.iam_email
     automation-tf-bootstrap-sa = module.automation-tf-bootstrap-sa.iam_email
@@ -34,9 +29,6 @@ locals {
   }
 }
 
-output "rendered_org_yaml" {
-  value = local.rendered_org_decoded_yaml.projects["automation"].iam
-}
 module "org_project" {
   source          = "../../../modules/project"
   for_each        = local.project_list

@@ -75,11 +75,14 @@ projects:
           member: "${automation-tf-bootstrap-r-sa}"
           role: roles/serviceusage.serviceUsageViewer
 
-
     audit:
       org_id: 592550595621
       services:
       - bigquery.googleapis.com
       - storage.googleapis.com
       - stackdriver.googleapis.com
-      
+      iam:
+       roles/owner:
+        - "${automation-tf-bootstrap-sa}"
+       roles/viewer:
+        - "${automation-tf-bootstrap-r-sa}"
