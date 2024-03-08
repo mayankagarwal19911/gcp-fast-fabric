@@ -32,10 +32,10 @@ locals {
           units           = null
           use_last_period = null
         },
-        try(v.amount, {})
+        try(v[keys(v)[0]].amount, {})
       )
       display_name = try(v.display_name, null)
-      filter = try(v.filter, null) == null ? null : {
+      filter = try(v.filter[keys(v)[0]], null) == null ? null : {
         credit_types_treatment = (
           try(v.filter.credit_types_treatment, null) == null
           ? null

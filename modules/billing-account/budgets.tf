@@ -67,13 +67,13 @@ resource "google_billing_budget" "default" {
         : "INCLUDE_ALL_CREDITS"
       )
     )
-    labels = each.value.filter.label == null ? null : {
+    labels = try(each.value.filter.label, null) == null ? null : {
       (each.value.filter.label.key) = each.value.filter.label.value
     }
-    projects           = each.value.filter.projects
-    resource_ancestors = each.value.filter.resource_ancestors
-    services           = each.value.filter.services
-    subaccounts        = each.value.filter.subaccounts
+    projects           = try(each.value.filter.projects, null)
+    resource_ancestors = try(each.value.filter.resource_ancestors, null)
+    services           = try(each.value.filter.services, null)
+    subaccounts        = try(each.value.filter.subaccounts, null)
     dynamic "custom_period" {
       for_each = try(each.value.filter.period.custom, null) != null ? [""] : []
       content {
