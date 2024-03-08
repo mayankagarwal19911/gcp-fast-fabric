@@ -97,6 +97,8 @@ variable "factories_config" {
       budgets_data_path     = string
       notification_channels = optional(map(any), {})
     }))
+    custom_roles            = optional(string)
+    org_policies              = optional(string)
   })
   nullable = false
 }
