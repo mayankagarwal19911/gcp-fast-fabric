@@ -1,11 +1,11 @@
 output "folder_details" {
   description = "Folder details."
-  value = module.lz.folder_details
+  value       = module.lz.folder_details
 }
 
 output "projects" {
   description = "Created projects."
-  value = module.lz.projects
+  value       = module.lz.projects
 }
 
 # output "service_accounts" {
