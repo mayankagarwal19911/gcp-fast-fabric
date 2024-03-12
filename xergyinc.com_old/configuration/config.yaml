@@ -1,0 +1,33 @@
+billing_account: 
+  id     : 01B99A-DD5693-589F25
+  no_iam :  true
+
+organization:
+  domain      : xergyinc.com
+  id          : 592550595621
+  customer_id : C03p38uzs
+
+prefix: xergy-org
+
+factories_config:
+  custom_roles : ../../fast/stages/0-bootstrap/data/custom-roles/
+  org_policies : ../../fast/stages/0-bootstrap/data/org-policies/
+  
+essential_contacts : gcp-organization-admins@xergyinc.com
+
+groups: 
+  gcp-support: group:gcp-support@xergyinc.com
+
+project_parent_ids :
+#   billing    : folders/shared
+  automation : folders/113332916602 # Automation refers to automation project
+  logging    : folders/113332916602  # Logging refers to audit project
+
+# attribute_condition: "attribute.repository_owner==\"mayankagarwal19911\""
+# issuer              : github
+
+# cicd_repository_name: bootstrap
+# branch            : master
+# identity_provider : github-sample
+# name              : mayankagarwal19911/gcp-fast-fabric
+# type              : github

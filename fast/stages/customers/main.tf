@@ -21,4 +21,3 @@ module "projects" {
   factories_config = var.factories_config
   depends_on = [ module.folder ]
 }
-

@@ -65,3 +65,37 @@ variable "temp_project_bool" {
   type        = bool
   default     = true
 }
+
+variable "tag_bindings" {
+  description = "Tag bindings for this folder, in key => tag value id format."
+  type        = map(string)
+  nullable    = false
+  default     = {}
+}
+
+
+# variable "zone_name" {
+#   description = "Zone name, must be unique within the project."
+#   type        = string
+# }
+
+# variable "zone_project_id" {
+#   description = "Project id for the zone."
+#   type        = string
+# }
+
+
+variable "workload_identity_providers" {
+  description = "Workload Identity Federation pools. The `cicd_repositories` variable references keys here."
+  type = map(object({
+    attribute_condition = optional(string)
+    issuer              = string
+    custom_settings = optional(object({
+      issuer_uri = optional(string)
+      audiences  = optional(list(string), [])
+      jwks_json  = optional(string)
+    }), {})
+  }))
+  default  = {}
+  nullable = false
+}

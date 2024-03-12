@@ -155,7 +155,7 @@ resource "google_iam_workload_identity_pool_provider" "default" {
 #   description = "CI/CD repository configurations."
 #   value = {
 #     for key, value in local.cicd_repositories : key => {
-      
+
 #       branch = value.branch
 #       identity_provider = local.cicd_providers
 

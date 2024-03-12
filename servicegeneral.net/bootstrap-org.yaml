@@ -1,0 +1,23 @@
+billing_account_id: 01621B-D308AE-C0992D
+no_iam: true
+
+organization_domain      : servicegeneral.net
+organization_id          : 695430022532
+customer_id : C01e1u7fv
+
+prefix: btstrap01
+
+
+custom_roles_path : ../fast/stages/0-bootstrap/data/custom-roles/
+
+
+attribute_condition: "attribute.repository_owner==\"mayankagarwal19911\""
+issuer              : github
+
+cicd_repository_name: bootstrap
+branch            : master
+identity_provider : github-sample
+name              : mayankagarwal19911/gcp-fast-fabric
+type              : github
+
+outputs_location : ~/fast-config

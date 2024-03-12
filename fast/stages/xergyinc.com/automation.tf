@@ -42,8 +42,8 @@ module "automation-tf-resman-sa" {
 }
 
 module "automation-tf-resman-r-sa" {
-  source       = "../../../modules/iam-service-account"
-  project_id   = "org-dev-automation"
+  source     = "../../../modules/iam-service-account"
+  project_id = "org-dev-automation"
   # local.automation_project_id
   name         = "resman-0r"
   display_name = "Terraform org level(Stage 1) resman service account (read-only)."

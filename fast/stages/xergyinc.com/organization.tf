@@ -16,7 +16,9 @@
 
 # tfdoc:file:description Organization-level IAM.
 
+
 locals {
+  tags = try(yamldecode(file("${path.module}/tags.yaml")), null)
   # reassemble logical bindings into the formats expected by the module
   _iam_bindings = merge(
     local.iam_domain_bindings,
@@ -236,7 +238,7 @@ module "organization" {
     # "gcp.resourceLocations" = {}
     # "iam.workloadIdentityPoolProviders" = {}
   }
-  tags = {
+  tags = merge({
     (var.org_policies_config.tag_name) = {
       description = "Organization policy conditions."
       iam         = {}
@@ -246,6 +248,7 @@ module "organization" {
         },
         var.org_policies_config.tag_values
       )
-    }
-  }
+    },
+  }, try(local.tags.tags, null))
+  network_tags = try(local.tags.network_tags, null)
 }

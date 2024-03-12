@@ -22,8 +22,8 @@ variable "factories_config" {
       budgets_data_path     = string
       notification_channels = optional(map(any), {})
     }))
-    custom_roles          = optional(string)
-    org_policies          = optional(string)
+    custom_roles = optional(string)
+    org_policies = optional(string)
   })
 }
 
@@ -48,13 +48,20 @@ variable "organization" {
 
 variable "folder_name" {
   description = "Folder name to create"
-  type = string
-  nullable = false
+  type        = string
+  nullable    = false
 }
 
 variable "factories_config_folder" {
   description = "Path to folder with YAML folder level description policies data files."
   type = object({
-    org_policies          = optional(string)
+    org_policies = optional(string)
   })
+}
+
+
+variable "temp_project_bool" {
+  description = "Temporary variable to be used as false when folder needs to be created first."
+  type        = bool
+  default     = true
 }

@@ -16,8 +16,9 @@
 # Terraform will be unable to decode this file if it does not contain valid YAML
 # You can retain `---` (start of the document) to indicate an empty document.
 
-# constraints/gcp.resourceLocations:
-#   rules:
-#   - allow:
-#       values:
-#       - "in:europe-locations"
+constraints/gcp.resourceLocations:
+  rules:
+  - allow:
+      values:
+      - "in:europe-west1-locations"
+      - "in:europe-west2-locations"

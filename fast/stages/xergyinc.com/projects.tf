@@ -2,16 +2,16 @@
 
 locals {
   yaml_tf_variables_mapping = {
-    automation-tf-resman-r-sa = module.automation-tf-resman-r-sa.iam_email
-    automation-tf-bootstrap-sa = module.automation-tf-bootstrap-sa.iam_email
-    automation-tf-resman-sa = module.automation-tf-resman-sa.iam_email
-    automation-tf-bootstrap-r-sa = module.automation-tf-bootstrap-r-sa.iam_email
+    automation-tf-resman-r-sa                  = module.automation-tf-resman-r-sa.iam_email
+    automation-tf-bootstrap-sa                 = module.automation-tf-bootstrap-sa.iam_email
+    automation-tf-resman-sa                    = module.automation-tf-resman-sa.iam_email
+    automation-tf-bootstrap-r-sa               = module.automation-tf-bootstrap-r-sa.iam_email
     organization_storage_viewer_custom_role_id = module.organization.custom_role_id["storage_viewer"]
   }
 
   rendered_org_decoded_yaml = yamldecode(templatefile("${path.module}/configurations/org-config.tftpl",
     local.yaml_tf_variables_mapping
-    ))
+  ))
 
   project_list = {
     for index, project_details in local.rendered_org_decoded_yaml.projects : index => {
@@ -47,10 +47,10 @@ module "org_project" {
   iam_by_principals = local.project_list[each.key].iam_by_principals
 
   # machine (service accounts) IAM bindings
-  iam = local.project_list[each.key].iam
-  iam_bindings = local.project_list[each.key].iam_bindings
+  iam                   = local.project_list[each.key].iam
+  iam_bindings          = local.project_list[each.key].iam_bindings
   iam_bindings_additive = local.project_list[each.key].iam_bindings_additive
-  
+
   services = concat(try(local.project_list[each.key].services, []),
     # enable specific service only after org policies have been applied
     var.bootstrap_user != null ? [] : [
@@ -63,9 +63,9 @@ module "org_project" {
 
 # output files bucket
 module "tf_output_gcs" {
-  source     = "../../../modules/gcs"
-  for_each   = local.project_details
-  project_id = local.project_details[each.key][0].project_id
+  source        = "../../../modules/gcs"
+  for_each      = local.project_details
+  project_id    = local.project_details[each.key][0].project_id
   name          = "${local.project_details[each.key][0].project_id}-outputs-0"
   prefix        = local.prefix
   location      = local.locations.gcs

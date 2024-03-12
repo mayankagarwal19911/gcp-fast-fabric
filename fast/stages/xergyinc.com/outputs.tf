@@ -107,7 +107,8 @@ locals {
       key_name = var.org_policies_config.tag_name
       values = {
         for k, v in module.organization.tag_values :
-        split("/", k)[1] => v.id
+        k => v.id
+        # split("/", k)[1] => v.id
       }
     }
   }
@@ -155,7 +156,7 @@ output "outputs_buckets" {
 
 output "project_details" {
   description = "Projects details created by stage."
-  value = local.project_details
+  value       = local.project_details
 }
 
 # ready to use provider configurations for subsequent stages when not using files
@@ -211,8 +212,13 @@ output "workload_identity_pool" {
 
 output "logging_details" {
   value = {
-      project_id        = local.audit_project_id
-      project_number    = local.audit_project_number
-      writer_identities = module.organization.sink_writer_identities
-    }
+    project_id        = local.audit_project_id
+    project_number    = local.audit_project_number
+    writer_identities = module.organization.sink_writer_identities
+  }
+}
+
+output "tag_values" {
+  description = "Tag value resources."
+  value       = module.organization.tag_values
 }

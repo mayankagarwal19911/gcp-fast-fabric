@@ -1,0 +1,90 @@
+tags:
+  project_id: 
+    description: The project ID.
+    iam: null
+    values: null
+  chargeable:
+    description: Identifies resources that may be charged back to the customer.
+    iam: null
+    values:
+      true:
+        description: The resources are chargeable.
+        iam:
+      false:
+        description: The resources are not chargeable.
+  business_line: 
+    description: Parent business line.
+    iam: null
+    values:
+      group:
+        description: The core entity or org.
+        iam:
+      government:
+        description: The govt. entity of org.
+        iam: 
+  department: 
+    description: Parent department.
+    iam: null
+    values:
+      government:
+        description: The government department.
+        iam:
+      core:
+        description: The core department.
+        iam:
+      group-it:
+        description: The IT department.
+        iam:
+  environment: 
+    description: The stage of the project lifecycle.
+    iam: null
+    values:
+      dev:
+        description: The dev environment.
+        iam:
+      test:
+        description: The test environment.
+        iam:
+      stable:
+        description: The stable environment.
+        iam:
+
+  contact: 
+    description: Point of contact for the team or individual responsible for the resource.
+    iam: null
+    values:
+      ask-core-engineering:
+        description: Use channel '#ask-core-engineering'
+      ask-vv:
+        description: Use channel '#ask-vv'
+      ask-it:
+        description: Use channel '#ask-it'
+  source_repo: 
+    description: Location of the source Terraform repository
+    iam: null
+    values:
+      terraform-google-modules:
+        description: The github repository for the source repo of these resources
+  cost_center: 
+    description: The cost centre is associated with the resource. Usually the Project or Department.
+    iam: null
+    values:
+      core:
+        description: The core cost centre.
+        iam:
+      group-it:
+        description: The IT cost centre.
+        iam:
+      government:
+        description: The government cost centre.
+        iam:
+  classification: 
+    description: Security classification level.
+    iam: null
+    values:
+      public:
+        description: The public classification.
+        iam:
+      internal:
+        description: The internal classification.
+        iam:
