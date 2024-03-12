@@ -1,0 +1,13 @@
+display_name: 200 INR for projects
+amount:
+  units: 200
+  nanos: 1
+  currency_code: 'INR'
+filter:
+  period:
+    calendar: MONTH
+  resource_ancestors:
+  - folders/676856021563
+threshold_rules:
+- percent: 0.5
+- percent: 0.75

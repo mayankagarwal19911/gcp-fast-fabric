@@ -62,6 +62,7 @@ module "projects" {
     each.value.tag_bindings,
     var.data_merges.tag_bindings
   )
+  factories_config = var.factories_config
 }
 
 module "service-accounts" {

@@ -1,0 +1,7 @@
+iam.disableServiceAccountKeyCreation:
+  rules:
+    - enforce: false
+
+custom.gkeEnableAutoUpgrade123:
+  rules:
+    - enforce: false

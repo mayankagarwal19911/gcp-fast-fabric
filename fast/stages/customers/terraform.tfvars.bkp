@@ -1,0 +1,27 @@
+billing_account = {
+  id = "01B99A-DD5693-589F25"
+}
+
+organization = {
+  domain      = "xergyinc.com"
+  id          = 592550595621
+  customer_id = "C03p38uzs"
+}
+
+factories_config = {
+  projects_data_path = "./customers/customer-aa/data/projects/" 
+  org_policies = "./customers/customer-aa/data/policies/project/"
+  # budgets = {
+  #   budgets_data_path = "./data/billing_budget"
+  #   billing_account = "billing-xx-0"
+  #   }
+}
+
+factories_config_folder = {
+   org_policies = "./customers/customer-aa/data/policies/folder/"
+}
+
+
+# use something unique and no longer than 9 characters
+prefix = "cust-aa"
+folder_name = "customer-aa"

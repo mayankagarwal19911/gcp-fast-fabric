@@ -1,0 +1,16 @@
+resource.hasTagKey:
+  constraint_default: DENY
+  tags:
+    values:
+      - key: project_id
+      - key: chargeable
+      - key: business_line
+      - key: department
+      - key: environment
+      - key: contact
+      - key: source_repo
+      - key: cost_center
+      - key: classification
+  rules:
+  - enforce: true
+

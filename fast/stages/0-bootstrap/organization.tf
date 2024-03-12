@@ -106,9 +106,9 @@ locals {
   ])
 }
 
-# TODO: add a check block to ensure our custom roles exist in the factory files
+# # TODO: add a check block to ensure our custom roles exist in the factory files
 
-# import org policy constraints enabled by default in new orgs since February 2024
+# # import org policy constraints enabled by default in new orgs since February 2024
 # import {
 #   for_each = (
 #     !var.org_policies_config.import_defaults || var.bootstrap_user != null
@@ -202,14 +202,14 @@ module "organization" {
       var.bootstrap_user != null ? null : var.factories_config.org_policy
     )
   }
-  logging_sinks = {
-    for name, attrs in var.log_sinks : name => {
-      bq_partitioned_table = attrs.type == "bigquery"
-      destination          = local.log_sink_destinations[name].id
-      filter               = attrs.filter
-      type                 = attrs.type
-    }
-  }
+  # logging_sinks = {
+  #   for name, attrs in var.log_sinks : name => {
+  #     bq_partitioned_table = attrs.type == "bigquery"
+  #     destination          = local.log_sink_destinations[name].id
+  #     filter               = attrs.filter
+  #     type                 = attrs.type
+  #   }
+  # }
   org_policies = var.bootstrap_user != null ? {} : {
     "iam.allowedPolicyMemberDomains" = {
       rules = [

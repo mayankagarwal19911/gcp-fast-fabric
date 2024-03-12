@@ -1,0 +1,22 @@
+display_name: 500 INR for folder
+amount:
+  units: 500
+  nanos: 1
+  currency_code: 'INR'
+filter:
+  period:
+    calendar: MONTH
+  resource_ancestors:
+  - folders/676856021563
+threshold_rules:
+- percent: 0.5
+- percent: 0.75
+update_rules:
+  default:
+    disable_default_iam_recipients: true
+    monitoring_notification_channels:
+    - update_rules:
+  default:
+    disable_default_iam_recipients: true
+    monitoring_notification_channels:
+    - billing-email-channel

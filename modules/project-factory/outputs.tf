@@ -26,3 +26,7 @@ output "service_accounts" {
     for k, v in module.service-accounts : k => v.email
   }
 }
+
+output "billing_account" {
+  value = module.billing-account
+}

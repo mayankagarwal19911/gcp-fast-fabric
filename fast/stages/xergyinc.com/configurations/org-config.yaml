@@ -1,0 +1,73 @@
+projects:
+    automation: 
+      org_id: 592550595621
+      services:
+      - accesscontextmanager.googleapis.com
+      - bigquery.googleapis.com
+      - bigqueryreservation.googleapis.com
+      - bigquerystorage.googleapis.com
+      - billingbudgets.googleapis.com
+      - cloudbilling.googleapis.com
+      - cloudkms.googleapis.com
+      - cloudresourcemanager.googleapis.com
+      - essentialcontacts.googleapis.com
+      - iam.googleapis.com
+      - iamcredentials.googleapis.com
+      - orgpolicy.googleapis.com
+      - pubsub.googleapis.com
+      - servicenetworking.googleapis.com
+      - serviceusage.googleapis.com
+      - sourcerepo.googleapis.com
+      - stackdriver.googleapis.com
+      - storage-component.googleapis.com
+      - storage.googleapis.com
+      - sts.googleapis.com
+      iam_by_principals:
+        gcp-devops:
+        - roles/iam.serviceAccountAdmin
+        - roles/iam.serviceAccountTokenCreator
+        gcp-organization-admins:
+        - roles/iam.serviceAccountTokenCreator
+        - roles/iam.workloadIdentityPoolAdmin
+      iam:
+        roles/browser:
+        - automation-tf-resman-r-sa
+        roles/owner:
+        - automation-tf-bootstrap-sa
+        roles/cloudbuild.builds.editor:
+        - automation-tf-resman-sa
+        roles/cloudbuild.builds.viewer:
+        - automation-tf-resman-r-sa
+        roles/iam.serviceAccountAdmin:
+        - automation-tf-resman-sa
+        roles/iam.serviceAccountViewer:
+        - automation-tf-resman-r-sa
+        roles/iam.workloadIdentityPoolAdmin:
+        - automation-tf-resman-sa
+        roles/iam.workloadIdentityPoolViewer:
+        - automation-tf-resman-r-sa
+        roles/source.admin:
+        - automation-tf-resman-sa
+        roles/source.reader:
+        - automation-tf-resman-r-sa
+        roles/storage.admin:
+        - automation-tf-resman-sa
+        organization_storage_viewer_custom_role_id:
+        - automation-tf-bootstrap-r-sa
+        - automation-tf-resman-r-sa
+        roles/viewer:
+        - automation-tf-bootstrap-r-sa
+        - automation-tf-resman-r-sa
+      iam_bindings:
+        delegated_grants_resman:
+          members:
+      iam_bindings_additive:
+
+
+    audit:
+      org_id: 592550595621
+      services:
+      - bigquery.googleapis.com
+      - storage.googleapis.com
+      - stackdriver.googleapis.com
+      

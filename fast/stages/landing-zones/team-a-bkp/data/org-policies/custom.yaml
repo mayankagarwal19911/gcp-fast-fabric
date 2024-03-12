@@ -1,0 +1,9 @@
+# name: folders/203593119232/policies/custom.gkeEnableAutoUpgrade
+# spec:
+#   rules:
+#   - enforce: false
+
+# folders/203593119232/policies/custom.gkeEnableAutoUpgrade123:
+#   rules:
+#     - enforce: false
+{}

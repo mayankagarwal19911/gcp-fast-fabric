@@ -76,6 +76,22 @@ variable "factories_config" {
   default  = {}
 }
 
+# variable "factories_config" {
+#   description = "Path to folder with YAML resource description data files."
+#   type = object({
+#     projects_data_path = string
+#     budgets = optional(object({
+#       billing_account       = string
+#       budgets_data_path     = string
+#       notification_channels = optional(map(any), {})
+#     }))
+#     custom_roles            = optional(string)
+#     org_policies              = optional(string)
+#   })
+#   nullable = false
+# }
+
+
 variable "labels" {
   description = "Resource labels."
   type        = map(string)

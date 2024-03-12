@@ -1,0 +1,4 @@
+custom.gkeEnableAutoUpgrade123:
+  rules:
+    - enforce: true
+  

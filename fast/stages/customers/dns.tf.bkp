@@ -1,0 +1,5 @@
+module "dns" {
+  source = "../../../modules/dns"
+  name = var.zone_name
+  project_id = var.zone_project_id
+}
