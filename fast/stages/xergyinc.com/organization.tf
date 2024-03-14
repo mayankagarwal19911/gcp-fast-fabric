@@ -214,27 +214,28 @@ module "organization" {
     }
   }
   org_policies = var.bootstrap_user != null ? {} : {
-    "iam.allowedPolicyMemberDomains" = {
-      rules = [
-        {
-          allow = { values = local.drs_domains }
-          condition = {
-            expression = (
-              "!resource.matchTag('${local.drs_tag_name}', 'allowed-policy-member-domains-all')"
-            )
-          }
-        },
-        {
-          allow = { all = true }
-          condition = {
-            expression = (
-              "resource.matchTag('${local.drs_tag_name}', 'allowed-policy-member-domains-all')"
-            )
-            title = "allow-all"
-          }
-        },
-      ]
-    }
+    # TODO, Uncomment
+    # "iam.allowedPolicyMemberDomains" = {
+    #   rules = [
+    #     {
+    #       allow = { values = local.drs_domains }
+    #       condition = {
+    #         expression = (
+    #           "!resource.matchTag('${local.drs_tag_name}', 'allowed-policy-member-domains-all')"
+    #         )
+    #       }
+    #     },
+    #     {
+    #       allow = { all = true }
+    #       condition = {
+    #         expression = (
+    #           "resource.matchTag('${local.drs_tag_name}', 'allowed-policy-member-domains-all')"
+    #         )
+    #         title = "allow-all"
+    #       }
+    #     },
+    #   ]
+    # }
     # "gcp.resourceLocations" = {}
     # "iam.workloadIdentityPoolProviders" = {}
   }

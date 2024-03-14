@@ -1,0 +1,48 @@
+# tfdoc:file:description Project factory.
+
+locals {
+
+  _iam_groups_raw = {
+    for f in try(fileset(var.factories_config.projects_data_path, "*.yaml"), []) :
+    replace(f, ".yaml", "") => yamldecode(
+      file("${var.factories_config.projects_data_path}/${f}")
+    )
+  }
+
+  _iam_by_principals = {
+    for key, value in local._iam_groups_raw: key =>{
+        for k, v in value : k => v if k == "iam_by_principals"
+    } 
+  }
+
+#   principals = {
+#     for k, v in var.groups : k => (
+#       can(regex("^[a-zA-Z]+:", v))
+#       ? v
+#       : "group:${v}@${var.organization.domain}"
+#     )
+#   }
+
+#   variable "iam" {
+#   description = "IAM bindings, in {ROLE => [MEMBERS]} format."
+#   type        = map(list(string))
+#   default     = {}
+#   nullable    = false
+# }
+}
+module "iam_group" {
+  source = "../../../modules/cloud-identity-group"
+  customer_id = "customers/${var.organization.customer_id}"
+  display_name = var.group_display_name
+  description = var.group_description
+  name = var.group_name
+}
+
+# resource "google_organization_iam_binding" "authoritative" {
+#   for_each = local.iam
+#   org_id   = local.organization_id_numeric
+#   role     = each.key
+#   members  = each.value
+#   depends_on = [ module.iam_group ]
+#   # ensuring that custom role exists is left to the caller, by leveraging custom_role_id output
+# }

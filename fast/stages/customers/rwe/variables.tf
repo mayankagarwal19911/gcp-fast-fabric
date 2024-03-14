@@ -27,16 +27,6 @@ variable "factories_config" {
   })
 }
 
-variable "prefix" {
-  # tfdoc:variable:source 0-bootstrap
-  description = "Prefix used for resources that need unique names. Use 9 characters or less."
-  type        = string
-  validation {
-    condition     = try(length(var.prefix), 0) < 10
-    error_message = "Use a maximum of 9 characters for prefix."
-  }
-}
-
 variable "organization" {
   description = "Organization details."
   type = object({
@@ -46,11 +36,11 @@ variable "organization" {
   })
 }
 
-variable "folder_name" {
-  description = "Folder name to create"
-  type        = string
-  nullable    = false
-}
+# variable "folder_name" {
+#   description = "Folder name to create"
+#   type        = string
+#   nullable    = false
+# }
 
 variable "factories_config_folder" {
   description = "Path to folder with YAML folder level description policies data files."
@@ -73,17 +63,15 @@ variable "tag_bindings" {
   default     = {}
 }
 
+variable "zone_name" {
+  description = "Zone name, must be unique within the project."
+  type        = string
+}
 
-# variable "zone_name" {
-#   description = "Zone name, must be unique within the project."
-#   type        = string
-# }
-
-# variable "zone_project_id" {
-#   description = "Project id for the zone."
-#   type        = string
-# }
-
+variable "zone_project_id" {
+  description = "Project id for the zone."
+  type        = string
+}
 
 variable "workload_identity_providers" {
   description = "Workload Identity Federation pools. The `cicd_repositories` variable references keys here."
@@ -97,5 +85,27 @@ variable "workload_identity_providers" {
     }), {})
   }))
   default  = {}
+  nullable = false
+}
+
+variable "group_description" {
+  description = "Group description."
+  type        = string
+  default     = null
+}
+
+variable "group_display_name" {
+  description = "Group display name."
+  type        = string
+}
+
+variable "group_name" {
+  description = "Group name."
+  type        = string
+}
+
+variable "client_initials" {
+  description = "Client initials to be used in resources naming convention"
+  type = string
   nullable = false
 }

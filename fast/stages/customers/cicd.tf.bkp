@@ -97,9 +97,20 @@ module "automation-tf-cicd-sa" {
       ]
     }
   )
-  # iam_project_roles = {
-  #   (local.automation_project_id) = ["roles/logging.logWriter"]
-  # }
+  iam_project_roles = {
+    (local.cicd_repositories_sa_details[count.index].project_id) = [
+        "roles/container.clusterAdmin", 
+        "roles/dns.admin",
+        "roles/storage.admin",
+        "roles/compute.instanceAdmin",
+        "roles/compute.networkAdmin",
+        # "roles/privateconnectservice.admin",
+        "roles/iam.serviceAccountUser",
+        "roles/iam.serviceAccountTokenCreator",
+        "roles/secretmanager.secretAccessor",
+        "roles/monitoring.dashboardEditor"
+        ]
+  }
   # iam_storage_roles = {
   #   ("${module.tf_output_gcs["automation"].name}") = ["roles/storage.objectViewer"]
   # }

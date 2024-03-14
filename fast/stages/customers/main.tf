@@ -1,5 +1,10 @@
 # tfdoc:file:description Project factory.
 
+locals {
+ yaml_tf_project_mapping = { 
+    parent_folder_id = local.parent_folder_id 
+  }
+}
 module "projects" {
   source = "../../../modules/project-factory"
   count = var.temp_project_bool ? 1 : 0
@@ -9,15 +14,15 @@ module "projects" {
   }
   data_merges = {
     labels = {
-      environment = "dev"
+      environment = var.environment
     }
-    services = [
-      "stackdriver.googleapis.com"
-    ]
+    services = [ ]
   }
   data_overrides = {
-    prefix = "${var.prefix}-dev"
+    prefix = ""
   }
+  is_project_file_a_template = true
   factories_config = var.factories_config
+  yaml_tf_project_mapping = local.yaml_tf_project_mapping
   depends_on = [ module.folder ]
 }

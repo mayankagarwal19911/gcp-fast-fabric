@@ -1,0 +1,125 @@
+labels:
+ team: trading-app
+ environment: stable
+parent: folders/676856021563
+services:
+- container.googleapis.com
+- storage.googleapis.com
+- compute.googleapis.com
+- monitoring.googleapis.com
+- privateca.googleapis.com
+- cloudresourcemanager.googleapis.com
+- cloudkms.googleapis.com
+- servicenetworking.googleapis.com
+- secretmanager.googleapis.com
+- serviceusage.googleapis.com
+
+service_accounts:
+  customer-bb-be:
+    iam_project_roles:
+    - roles/logging.logWriter
+    - roles/monitoring.metricWriter
+  customer-bb-fe:
+    iam_project_roles:
+      - roles/compute.networkUser
+
+shared_vpc_service_config:
+  host_project: billing-xx-0
+  service_identity_iam:
+    # "roles/vpcaccess.user":
+    # - cloudrun
+    "roles/container.hostServiceAgentUser":
+    - container-engine
+  service_identity_subnet_iam:
+    europe-west1/prod-default-ew1:
+    - cloudservices
+    - container-engine
+  network_subnet_users:
+    europe-west1/prod-default-ew1:
+    - group:gcp-network-admins@xergyinc.com
+
+billing_budgets:
+- project-budget
+
+workload_identity_provider:
+  gh-provider:
+    attribute_condition: "attribute.repository_owner==\"mayankagarwal19911\""
+    issuer: github
+    custom_settings:
+      issuer_uri:
+      audiences:
+      jwks_json:
+
+lz_repo:
+  name: mayankagarwal19911/fast-org-bootstrap
+  type: github
+  branch: main
+  identity_provider: gh-provider # should match with the provider defined above
+
+# iam_by_principals:
+#   engineer:
+#     roles:
+#       - roles/viewer
+#       - roles/container.developer
+#       - roles/container.clusterViewer
+#     description: Landing Zone Engineer - Developer Engineer account for working on customer projects.
+#   iam-admin:
+#     roles:
+#       - roles/resourcemanager.projectIamAdmin
+#       - roles/container.developer
+#       - roles/container.clusterViewer
+#     description: Landing Zone IAM Admin -Project leaders can assign specific members to Google Groups.
+#   devops-engineer:
+#     roles:
+#       - roles/container.clusterAdmin 
+#       - roles/dns.admin 
+#       - roles/storage.admin 
+#       - roles/compute.instanceAdmin 
+#       - roles/compute.networkAdmin 
+#       - roles/storage.admin 
+#       - roles/privateconnectservice.admin 
+#       - roles/iam.serviceAccountUser 
+#       - roles/iam.serviceAccountTokenCreator 
+#       - roles/secretmanager.secretAccessor
+#     description: Landing Zone DevOps Engineer- Project DevOps engineers that are attached to our customer projects
+#   secops-engineer:
+#     roles:
+#       - roles/iam.securityReviewer
+#       - roles/logging.viewer 
+#       - roles/logging.privateLogViewer 
+#       - roles/monitoring.admin 
+#       - roles/orgpolicy.policyViewer 
+#       - roles/cloudsecurityscanner.editor 
+#       - roles/advisorynotifications.viewer
+#     description: Landing Zone Security Engineer - Security engineers that are attached to our customer projects
+
+
+
+# iam_by_principals:
+#   group:engineer@xergyinc.com:
+#     - roles/viewer
+#     - roles/container.developer
+#     - roles/container.clusterViewer
+#   group:iam-admin@xergyinc.com:
+#   - roles/resourcemanager.projectIamAdmin
+#   - roles/container.developer
+#   - roles/container.clusterViewer
+  # devops-engineer:
+  # - roles/container.clusterAdmin 
+  # - roles/dns.admin 
+  # - roles/storage.admin 
+  # - roles/compute.instanceAdmin 
+  # - roles/compute.networkAdmin 
+  # - roles/storage.admin 
+  # - roles/privateconnectservice.admin 
+  # - roles/iam.serviceAccountUser 
+  # - roles/iam.serviceAccountTokenCreator 
+  # - roles/secretmanager.secretAccessor
+  # secops-engineer:
+  # - roles/iam.securityReviewer
+  # - roles/logging.viewer 
+  # - roles/logging.privateLogViewer 
+  # - roles/monitoring.admin 
+  # - roles/orgpolicy.policyViewer 
+  # - roles/cloudsecurityscanner.editor 
+  # - roles/advisorynotifications.viewer

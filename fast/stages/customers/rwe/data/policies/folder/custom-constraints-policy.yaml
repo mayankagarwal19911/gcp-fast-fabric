@@ -1,4 +1,4 @@
-custom.gkeEnableAutoUpgrades:
+custom.gkeEnableAutoUpgrade:
   rules:
     - enforce: false
   

@@ -19,7 +19,7 @@ locals {
   )
   log_types = toset([for k, v in var.log_sinks : v.type])
 
-  audit_project_id     = lookup(local.project_details, "audit")[0].project_id
+  audit_project_id     = lookup(local.project_details, "audit")[0].id
   audit_project_number = lookup(local.project_details, "audit")[0].project_number
 }
 
@@ -38,7 +38,7 @@ module "log-export-gcs" {
   source        = "../../../modules/gcs"
   count         = contains(local.log_types, "storage") ? 1 : 0
   project_id    = local.audit_project_id
-  name          = "org-dev-audit"
+  name          = "${var.prefix}-${var.environment}-audit"
   prefix        = local.prefix
   location      = local.locations.gcs
   storage_class = local.gcs_storage_class
@@ -51,6 +51,7 @@ module "log-export-logbucket" {
   parent      = local.audit_project_id
   id          = "audit-logs-${each.key}"
   location    = local.locations.logging
+  
 }
 
 module "log-export-pubsub" {

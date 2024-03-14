@@ -7,7 +7,7 @@ locals {
 
 module "automation-tf-resman-gcs" {
   source        = "../../../modules/gcs"
-  project_id    = "org-dev-automation"
+  project_id    = local.automation_project_id
   name          = "iac-core-resman-0"
   prefix        = local.prefix
   location      = local.locations.gcs
@@ -22,7 +22,7 @@ module "automation-tf-resman-gcs" {
 
 module "automation-tf-resman-sa" {
   source       = "../../../modules/iam-service-account"
-  project_id   = "org-dev-automation"
+  project_id   = local.automation_project_id
   name         = "resman-0"
   display_name = "Terraform org level(Stage 1) resman service account."
   prefix       = local.prefix
@@ -43,7 +43,7 @@ module "automation-tf-resman-sa" {
 
 module "automation-tf-resman-r-sa" {
   source     = "../../../modules/iam-service-account"
-  project_id = "org-dev-automation"
+  project_id = local.automation_project_id
   # local.automation_project_id
   name         = "resman-0r"
   display_name = "Terraform org level(Stage 1) resman service account (read-only)."
@@ -76,7 +76,7 @@ module "automation-tf-resman-r-sa" {
 
 module "automation-tf-bootstrap-gcs" {
   source        = "../../../modules/gcs"
-  project_id    = "org-dev-automation"
+  project_id    = local.automation_project_id
   name          = "iac-core-bootstrap-0"
   prefix        = local.prefix
   location      = local.locations.gcs
@@ -87,7 +87,7 @@ module "automation-tf-bootstrap-gcs" {
 
 module "automation-tf-bootstrap-sa" {
   source       = "../../../modules/iam-service-account"
-  project_id   = "org-dev-automation"
+  project_id   = local.automation_project_id
   name         = "bootstrap-0"
   display_name = "Terraform organization bootstrap service account."
   prefix       = local.prefix
@@ -104,7 +104,7 @@ module "automation-tf-bootstrap-sa" {
 
 module "automation-tf-bootstrap-r-sa" {
   source       = "../../../modules/iam-service-account"
-  project_id   = "org-dev-automation"
+  project_id   = local.automation_project_id
   name         = "bootstrap-0r"
   display_name = "Terraform organization bootstrap service account (read-only)."
   prefix       = local.prefix

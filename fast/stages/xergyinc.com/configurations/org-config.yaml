@@ -1,6 +1,6 @@
 projects:
     automation: 
-      org_id: 592550595621
+      org_id: 695430022532
       services:
       - accesscontextmanager.googleapis.com
       - bigquery.googleapis.com
@@ -65,7 +65,7 @@ projects:
 
 
     audit:
-      org_id: 592550595621
+      org_id: 695430022532
       services:
       - bigquery.googleapis.com
       - storage.googleapis.com

@@ -297,3 +297,10 @@ variable "workload_identity_providers" {
   #   error_message = "Custom settings cannot be null."
   # }
 }
+
+variable "environment" {
+  description = "The environment of resources"
+  type = string
+  nullable = false
+  default = "stable"
+}

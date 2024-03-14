@@ -102,3 +102,15 @@ variable "factories_config" {
   })
   nullable = false
 }
+
+variable "is_project_file_a_template" {
+  description = "If a project definition is tftpl file."
+  type = bool
+  default = false
+}
+
+variable "yaml_tf_project_mapping" {
+  description = "Value map for tftpl file variables"
+  type = map(string)
+  default = { }
+}

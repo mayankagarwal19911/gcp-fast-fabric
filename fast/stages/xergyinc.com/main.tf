@@ -34,5 +34,5 @@ locals {
     pubsub  = var.locations.pubsub
   }
   # naming: environment used in most resource names
-  prefix = join("-", compact([var.prefix, "dev"]))
+  prefix = join("-", compact([var.prefix, var.environment]))
 }

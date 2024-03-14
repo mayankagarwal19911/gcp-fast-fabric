@@ -65,7 +65,7 @@ module "org_project" {
 module "tf_output_gcs" {
   source        = "../../../modules/gcs"
   for_each      = local.project_details
-  project_id    = local.project_details[each.key][0].project_id
+  project_id    = local.project_details[each.key][0].id
   name          = "${local.project_details[each.key][0].project_id}-outputs-0"
   prefix        = local.prefix
   location      = local.locations.gcs

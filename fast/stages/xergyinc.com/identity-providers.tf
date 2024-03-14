@@ -70,10 +70,15 @@ locals {
   project_details = { for key, value in module.org_project : key => [{
     project_id     = module.org_project[key].project_id
     project_number = module.org_project[key].number
+    id             = module.org_project[key].id
 
   }] }
   # project_ids = [for key, value in module.org_project : value.project_id]
-  automation_project_id     = lookup(local.project_details, "automation")[0].project_id
+
+  # Hardcoded to bypass cyclic dependency error
+  automation_project_id     = "exmwhitneq"
+  # lookup(local.project_details, "automation")[0].id
+  
   automation_project_number = lookup(local.project_details, "automation")[0].project_number
 
   # TO DELETE, only for testing purpose

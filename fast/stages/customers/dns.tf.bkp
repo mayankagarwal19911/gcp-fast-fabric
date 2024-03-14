@@ -2,4 +2,14 @@ module "dns" {
   source = "../../../modules/dns"
   name = var.zone_name
   project_id = var.zone_project_id
+  zone_config = {
+    domain = "test.example."
+    public = {}
+  }
+  recordsets = {
+    "A myhost" = { ttl = 300, records = ["127.0.0.1"] }
+  }
+  iam = {
+    "roles/dns.admin" = ["user:mayank@xergyinc.com"]
+  }
 }

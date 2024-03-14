@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+resource "random_string" "project_id" {
+  length  = 10
+  special = false
+  upper = false
+  numeric = false
+}
 
 locals {
   descriptive_name = (
@@ -29,7 +35,7 @@ locals {
       name       = try(google_project.project.0.name, null)
     }
     : {
-      project_id = "${local.prefix}${var.name}"
+      project_id = "${random_string.project_id.result}"
       number     = try(data.google_project.project.0.number, null)
       name       = try(data.google_project.project.0.name, null)
     }
@@ -38,14 +44,14 @@ locals {
 
 data "google_project" "project" {
   count      = var.project_create ? 0 : 1
-  project_id = "${local.prefix}${var.name}"
+  project_id = "${random_string.project_id.result}"
 }
 
 resource "google_project" "project" {
   count               = var.project_create ? 1 : 0
   org_id              = local.parent_type == "organizations" ? local.parent_id : null
   folder_id           = local.parent_type == "folders" ? local.parent_id : null
-  project_id          = "${local.prefix}${var.name}"
+  project_id          = "${random_string.project_id.result}"
   name                = local.descriptive_name
   billing_account     = var.billing_account
   auto_create_network = var.auto_create_network

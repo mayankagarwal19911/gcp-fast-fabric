@@ -15,12 +15,20 @@
  */
 locals {
   _project_path = try(pathexpand(var.factories_config.projects_data_path), null)
-  _projects = (
+  _projects = !var.is_project_file_a_template ? (
     {
       for f in try(fileset(local._project_path, "**/*.yaml"), []) :
-      trimsuffix(f, ".yaml") => yamldecode(file("${local._project_path}/${f}"))
+        trimsuffix(f, ".yaml") => yamldecode(file("${local._project_path}/${f}"))
     }
-  )
+  ) : (
+      {
+        for f in try(fileset(local._project_path, "**/*.tftpl"), []) :
+          trimsuffix(f, ".yaml") => yamldecode(templatefile("${local._project_path}/${f}",
+          var.yaml_tf_project_mapping
+          ))
+        }
+    ) 
+  
   _project_budgets = flatten([
     for k, v in local._projects : [
       for b in try(v.billing_budgets, []) : {
@@ -58,11 +66,11 @@ locals {
         try(v.parent, null),
         var.data_defaults.parent
       )
-      prefix = coalesce(
+      prefix = try(coalesce(
         var.data_overrides.prefix,
         try(v.prefix, null),
         var.data_defaults.prefix
-      )
+      ), null)
       service_encryption_key_ids = coalesce(
         var.data_overrides.service_encryption_key_ids,
         try(v.service_encryption_key_ids, null),

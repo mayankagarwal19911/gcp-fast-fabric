@@ -12,14 +12,20 @@ terraform {
 }
 
 provider "google" {
-  # credentials = file("./billing-xx-0-7795562f43ae.json")
-  # impersonate_service_account = "terraform-service-account@billing-xx-0.iam.gserviceaccount.com"
+  # credentials = file("./vertex-ai-404204-29a104ec4c2d.json")
+  # impersonate_service_account = "terraform-service-account@vertex-ai-404204.iam.gserviceaccount.com"
   user_project_override = true
-  billing_project       = "billing-xx-0"
+  billing_project       =  "vertex-ai-404204"
+  # project     = "vertex-ai-404204"
+  # "billing-xx-0"
 
 }
 
 provider "google-beta" {
+  # credentials = file("./vertex-ai-404204-29a104ec4c2d.json")
+  # impersonate_service_account = "terraform-service-account@vertex-ai-404204.iam.gserviceaccount.com"
   user_project_override = true
-  billing_project       = "billing-xx-0"
+  billing_project       =  "vertex-ai-404204"
+  # project     = "vertex-ai-404204"
+  # "billing-xx-0"
 }

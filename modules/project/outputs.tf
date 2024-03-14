@@ -26,7 +26,7 @@ output "custom_role_ids" {
 
 output "id" {
   description = "Project id."
-  value       = "${local.prefix}${var.name}"
+  value       =  google_project.project.0.project_id
   depends_on = [
     google_project.project,
     data.google_project.project,

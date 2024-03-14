@@ -30,13 +30,13 @@ variable "factories_config" {
 
 
 variable "prefix" {
-  # tfdoc:variable:source 0-bootstrap
   description = "Prefix used for resources that need unique names. Use 9 characters or less."
   type        = string
   validation {
     condition     = try(length(var.prefix), 0) < 10
     error_message = "Use a maximum of 9 characters for prefix."
   }
+  default = null
 }
 
 variable "organization" {
@@ -48,11 +48,11 @@ variable "organization" {
   })
 }
 
-variable "folder_name" {
-  description = "Folder name to create"
-  type = string
-  nullable = false
-}
+# variable "folder_name" {
+#   description = "Folder name to create"
+#   type = string
+#   nullable = false
+# }
 
 variable "factories_config_folder" {
   description = "Path to folder with YAML folder level description policies data files."
@@ -130,12 +130,39 @@ variable "tag_bindings" {
   default = {}
 }
 
-# variable "zone_name" {
-#   description = "Zone name, must be unique within the project."
-#   type        = string
-# }
+variable "zone_name" {
+  description = "Zone name, must be unique within the project."
+  type        = string
+}
 
-# variable "zone_project_id" {
-#   description = "Project id for the zone."
-#   type        = string
-# }
+variable "zone_project_id" {
+  description = "Project id for the zone."
+  type        = string
+}
+
+variable "iam" {
+  description = "IAM bindings, in {ROLE => [MEMBERS]} format."
+  type        = map(list(string))
+  default     = {}
+  nullable    = false
+}
+
+variable "client_initials" {
+  description = "Client initials to be used in resources naming convention"
+  type = string
+  nullable = false
+}
+
+variable "environment" {
+  description = "The environment of resources"
+  type = string
+  nullable = false
+  default = "dev"
+}
+
+variable "domain_name" {
+  description = "The domain name"
+  type = string
+  nullable = false
+  default = "xergyinc.com"
+}

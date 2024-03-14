@@ -3,14 +3,11 @@ locals {
     tags = merge(try(yamldecode(file("${path.module}/tags.yaml")), null), var.tag_bindings)
 }
 
-output "tagstagstagstags" {
-  value = local.tags
-}
 module "folder" {
   source = "../../../modules/folder"
   count  = 1
   parent = "organizations/${var.organization.id}"
-  name   = var.folder_name
+  name   = local.parent_folder_name
   factories_config = var.factories_config_folder
   tag_bindings = local.tags
 #   iam_by_principals = {
